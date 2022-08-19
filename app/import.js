@@ -27,13 +27,17 @@ const filterList = async (rawList) => {
         rawList.map(item => {            
             const checkIfExists = newDataSet.find(item2 => item2.country === item.country)
             
+            let city = item.name
+            if(city.includes('/')) {
+                city = city.replace('/', '-')
+            }
             if(!checkIfExists) {
                 newDataSet.push({
                     country: item.country,
-                    cities: [item.name]
+                    cities: [city]
                 })
             } else {
-                newDataSet.find(item2 => item2.country === item.country).cities.push(item.name)
+                newDataSet.find(item2 => item2.country === item.country).cities.push(city)
             }
         })
     )
